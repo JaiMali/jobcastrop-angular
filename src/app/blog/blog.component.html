@@ -1,0 +1,4 @@
+<div class="blog-post" *ngFor="let post of posts; let i  = index">
+  <h1><a routerLink="/blog/{{post.seo_name}}">{{post.title}}<br/><span>{{post.subtitle}}</span></a></h1>
+  <div [innerHTML]="post.shorttext"></div>
+</div>
