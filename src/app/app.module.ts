@@ -28,4 +28,5 @@ import { PostComponent } from './post/post.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
