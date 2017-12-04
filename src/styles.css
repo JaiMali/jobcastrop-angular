@@ -6,13 +6,10 @@ html, body
 {
     color: #dcdcdc;
     background-color: #1e1e1e;
-}
-body
-{
     font-family: 'Source Code Pro', monospace;
 }
 
-h1 {
+h1, h1 a {
     color: #d16969;
 }
 
@@ -54,7 +51,13 @@ h3::after
     content: '</h3>';
 }
 
-
 a {
     color: #9CDCFE;
+}
+
+div.app
+{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
