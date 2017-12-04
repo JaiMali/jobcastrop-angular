@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+html, body
+{
+    color: #dcdcdc;
+    background-color: #1e1e1e;
+}
+body
+{
+    font-family: 'Source Code Pro', monospace;
+}
+
+h1 {
+    color: #d16969;
+}
+
+h1::before
+{
+    content: '<h1>';
+}
+
+h1::after
+{
+    content: '</h1>';
+}
+
+h2 {
+    color: #569cd6;
+}
+
+h2::before
+{
+    content: '<h2>';
+}
+
+h2::after
+{
+    content: '</h2>';
+}
+
+h3 {
+    color: #4EC9B0;
+}
+
+h3::before
+{
+    content: '<h3>';
+}
+
+h3::after
+{
+    content: '</h3>';
+}
+
+
+a {
+    color: #9CDCFE;
+}
