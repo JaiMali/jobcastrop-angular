@@ -9,6 +9,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogComponent } from './blog/blog.component';
 import { PostComponent } from './post/post.component';
+import { KeepHtmlPipe } from './keep-html.pipe';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PostComponent } from './post/post.component';
     HomeComponent,
     NotFoundComponent,
     BlogComponent,
-    PostComponent
+    PostComponent,
+    KeepHtmlPipe
   ],
   imports: [
     BrowserModule,
