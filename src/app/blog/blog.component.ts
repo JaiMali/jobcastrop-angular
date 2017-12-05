@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class BlogComponent implements OnInit {
   @Input() limit:number = 10;
   @Input() offset:number = 0;
-  public posts;
+  public data;
+  public posts: any[] = [];
   public title;
   public scrolled: boolean = false;
 
@@ -26,31 +27,32 @@ export class BlogComponent implements OnInit {
       { name: 'keywords', content: ''},
       { name: 'description', content: 'GET ALL THE POSTS!!!' }
     ]);
-  }
 
-  ngOnInit() {
-    this.loadPosts(this.limit, this.offset);
-  }
-
-  loadPosts(limit: Number, offset: Number)
-  {
-    this.http.get('https://www.jobcastrop.nl/restful/posts.php?limit=' + this.limit + '&offset=' + this.offset).subscribe(data => {
+    this.http.get('https://www.jobcastrop.nl/restful/posts.php?limit=100000&offset=0').subscribe(data => {
       // Read the result field from the JSON response.
-      this.posts = data;
-    });
+      this.data = data;
+      this.loadPosts(this.limit, this.offset);
+    });    
+  }
+
+  ngOnInit() {}
+
+  loadPosts(limit: number, offset: number)
+  {
+    for(let i = 0;i<=limit;i++)
+    {
+      let item = this.data.shift();
+      if(item)
+      {
+        this.posts.push(item);
+        this.scrolled = false;
+      }
+    }
   }
 
   loadMore()
   {
-    this.offset++;
-    this.http.get('https://www.jobcastrop.nl/restful/posts.php?limit=1&offset=' + this.offset).subscribe(data => {
-      // Read the result field from the JSON response.      
-      if(data[0])
-      {
-        this.scrolled = false;
-        return this.posts.push(data[0]);
-      }
-    });
+    this.loadPosts(1,0);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -60,5 +62,4 @@ export class BlogComponent implements OnInit {
         this.loadMore();
     }
   }
-
 }
