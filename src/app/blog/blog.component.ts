@@ -22,12 +22,6 @@ export class BlogComponent implements OnInit {
     this.title = 'Blog posts';
     title.setTitle(this.title + ' - Job Castrop');
 
-    meta.addTags([
-      { name: 'author',   content: 'jobcastrop.nl'},
-      { name: 'keywords', content: ''},
-      { name: 'description', content: 'GET ALL THE POSTS!!!' }
-    ]);
-
     this.http.get('https://www.jobcastrop.nl/restful/posts.php?limit=100000&offset=0').subscribe(data => {
       // Read the result field from the JSON response.
       this.data = data;
