@@ -1,4 +1,5 @@
-<div *ngIf="content">
-    <h1>{{title}}<br/><span>{{subtitle}}</span></h1>
-    <div class="content" [innerHTML]="content | keepHtml"></div>
-</div>
+<article class="blog-post" *ngFor="let post of posts; let i  = index">
+    <h1>{{post.title}}<br/><span>{{post.subtitle}}</span></h1>
+    <div [innerHTML]="post.shorttext | keepHtml"></div>
+    <div [innerHTML]="post.content | keepHtml"></div>
+  </article>
