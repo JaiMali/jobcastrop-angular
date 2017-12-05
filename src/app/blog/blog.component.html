@@ -2,5 +2,3 @@
   <h1><a routerLink="/blog/{{post.seo_name}}">{{post.title}}<br/><span>{{post.subtitle}}</span></a></h1>
   <div [innerHTML]="post.shorttext | keepHtml"></div>
 </article>
-
-<a (click)="loadMore()">Next</a>

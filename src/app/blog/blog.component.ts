@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Params, Data } from '@angular/router';
 import { Meta, Title } from "@angular/platform-browser";
 import { HttpClient } from '@angular/common/http';
-import { forEach } from '@angular/router/src/utils/collection';
-
 
 @Component({
   selector: 'app-blog',
@@ -15,6 +13,7 @@ export class BlogComponent implements OnInit {
   @Input() offset:number = 0;
   public posts;
   public title;
+  public scrolled: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, meta: Meta, title: Title, private http: HttpClient) { 
     let page = this.route.snapshot.data['page'];
@@ -43,8 +42,23 @@ export class BlogComponent implements OnInit {
 
   loadMore()
   {
-    this.limit += this.limit;
-    this.loadPosts(this.limit, this.offset);
+    this.offset++;
+    this.http.get('https://www.jobcastrop.nl/restful/posts.php?limit=1&offset=' + this.offset).subscribe(data => {
+      // Read the result field from the JSON response.      
+      if(data[0])
+      {
+        this.scrolled = false;
+        return this.posts.push(data[0]);
+      }
+    });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !this.scrolled) {
+        this.scrolled = true;
+        this.loadMore();
+    }
   }
 
 }
